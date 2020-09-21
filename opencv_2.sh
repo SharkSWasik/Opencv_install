@@ -1,10 +1,10 @@
-#!bin/bash
+#!/bin/bash
 
 cd ~
 mkdir cuda_install
 cd cuda_install
 wget https://developer.download.nvidia.com/compute/cuda/11.0.3/local_installers/cuda-repo-ubuntu2004-11-0-local_11.0.3-450.51.06-1_amd64.deb
-dpkg -i cuda-repo-ubuntu2004-11-0-local_11.0.3-450.51.06-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2004-11-0-local_11.0.3-450.51.06-1_amd64.deb
 
 # NVIDIA CUDA Toolkit
 "export PATH=/usr/local/cuda-11.0/bin:$PATH" >> ~/.bashrc
@@ -16,12 +16,13 @@ source ~/.bashrc
 cd ~
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.4.0.zip
 wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.4.0.zip
-unzip opencv.zip
-unzip opencv_contrib.zip
+sudo unzip opencv.zip
+sudo unzip opencv_contrib.zip
 mv opencv-4.4.0 opencv
 mv opencv_contrib-4.4.0 opencv_contrib
 
 #configure python virtual environment
+sudo apt-get install pip
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py
 sudo pip install virtualenv virtualenvwrapper
@@ -36,7 +37,7 @@ source ~/.bashrc
 
 #virtualenv with cuda
 mkvirtualenv opencv_cuda -p python3
-pip install numpy
+sudo pip install numpy
 workon opencv_cuda
 
 cd ~/opencv
