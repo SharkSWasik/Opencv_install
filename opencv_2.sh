@@ -28,10 +28,9 @@ sudo python3 get-pip.py
 sudo pip install virtualenv virtualenvwrapper
 sudo rm -rf ~/get-pip.py ~/.cache/pip
 
-"# virtualenv and virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
+echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
+source /usr/local/bin/virtualenvwrapper.sh
 
 source ~/.bashrc
 
@@ -41,7 +40,7 @@ sudo pip install numpy
 workon opencv_cuda
 
 cd ~/opencv
-mkdir build
+sudo mkdir build
 cd build
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -64,7 +63,7 @@ make -j8
 sudo make install
 sudo ldconfig
 cd ~/home/apolline/.local/bin/.virtualenvs/opencv_cuda/lib/python3.8/site-packages/
-ln -s /usr/local/lib/python3.8/site-packages/cv2/python-3.8/cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
+sudo ln -s /usr/local/lib/python3.8/site-packages/cv2/python-3.8/cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
 
 sudo update-rc.d -f opencv_2.sh remove
 exit 0
