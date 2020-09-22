@@ -11,18 +11,10 @@ INSTALL_DIR=/usr/local
 #install needed dependencies
 
 #need to reboot in order to update drivers
-cale=`dirname $0`
 sudo update-rc.d -f ~/opencv_2.sh remove
-cp $cale"~/opencv_2.sh" /etc/init.d/
+cp ~/opencv_2.sh /etc/init.d/
 sudo chmod +x /etc/init.d/opencv_2.sh
 sudo update-rc.d opencv_2.sh defaults 90
-
-sudo rm /etc/rc0.d/opencv_2.sh 
-sudo rm /etc/rc1.d/opencv_2.sh
-sudo rm /etc/rc3.d/opencv_2.sh
-sudo rm /etc/rc4.d/opencv_2.sh
-sudo rm /etc/rc5.d/opencv_2.sh
-sudo rm /etc/rc6.d/opencv_2.sh
 
 sudo apt-get update
 sudo apt-get upgrade
@@ -39,16 +31,16 @@ sudo apt-get install libgtk-3-dev #//
 
 
 #let's find your correct cuda gpu driver
-sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update
 
 #you must select the recommended driver
 
-cat ubuntu-drivers devices >> tmp
+echo $(ubuntu-drivers devices | awk '/recommended/') >> tmp
 
 DRIVER_VERSION=$(grep -o -E "*[0-9]+*" tmp)
 
+sudo apt-get install nvidia-driver-$DRIVER_VERSION
+
 rm tmp
 
-sudo apt-get install nvidia-driver-$DRIVER_VERSION
 sudo reboot
