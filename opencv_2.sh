@@ -11,6 +11,12 @@ sudo apt-get update
 sudo apt-get install cuda
 
 #download cudnn
+CUDNN_TAR_FILE="cudnn-8.0-linux-x64-v6.0.tgz"
+wget http://developer.download.nvidia.com/compute/redist/cudnn/v6.0/${CUDNN_TAR_FILE}
+sudo cp cuda/include/cudnn*.h /usr/local/cuda-11/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda-11/lib64
+sudo chmod a+r /usr/local/cuda-11/include/cudnn*.h /usr/local/cuda-11/lib64/libcudnn*
+
 # NVIDIA CUDA Toolkit
 "export PATH=/usr/local/cuda-11.0/bin:$PATH" >> ~/.bashrc
 "export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64" >> ~/.bashrc
